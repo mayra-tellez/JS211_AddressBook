@@ -18,7 +18,7 @@ const fetchUsers = () => {
       const li = document.createElement('li');
       const img = document.createElement('img');
   
-      img.src = person.picture.thumbnail;
+      img.src = person.picture.medium;
       img.alt = person.name.first;
   
       li.appendChild(img);
@@ -28,9 +28,14 @@ const fetchUsers = () => {
   
       h4.innerText = `${person.name.first} ${person.name.last}`;
       button.innerText = 'More Info';
-  
-      li.appendChild(h4);
-      li.appendChild(button);
+
+      // create container for h4 and button
+      const div = document.createElement('div');
+      div.appendChild(h4);
+      div.appendChild(button);
+
+      // add the div to the list item
+      li.appendChild(div);
       
       // run the displayInfo function when a button is clicked
       button.onclick = function displayInfo() {
@@ -52,15 +57,22 @@ const fetchUsers = () => {
         
         // set the inner text of the paragragh to be the person's info 
         p.innerText = info;
+
         // add the paragrah and hide button to the list item
         li.appendChild(p);
-        li.appendChild(hideBtn);
+        div.appendChild(hideBtn);
+
+        // add the expand box class to make room for info
+        li.classList.add('expandBox');
 
         // run the hideInfo function when the hide button is clicked
         hideBtn.onclick = function hideInfo() {
           // remove the paragraph and hide button from the list item
           li.removeChild(p);
-          li.removeChild(hideBtn);
+          div.removeChild(hideBtn);
+          
+          // remove the expand box class because it's no longer needed
+          li.classList.remove('expandBox');          
         }
       }
       list.appendChild(li);
