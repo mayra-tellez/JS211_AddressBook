@@ -32,7 +32,7 @@ const fetchUsers = () => {
       li.appendChild(h4);
       li.appendChild(button);
       
-      // the display info function runs when a button is clicked
+      // run the displayInfo function when a button is clicked
       button.onclick = function displayInfo() {
         // create a paragraph element to have a place for the info to be displayed 
         const p = document.createElement('p');
@@ -45,11 +45,23 @@ const fetchUsers = () => {
         Country: ${person.location.country}
         Email: ${person.email}
         `;
+
+        // create a new button element that will hide the info
+        const hideBtn = document.createElement('button');
+        hideBtn.innerText = 'Hide Info';
         
         // set the inner text of the paragragh to be the person's info 
         p.innerText = info;
-        // add the paragrah to the list item
+        // add the paragrah and hide button to the list item
         li.appendChild(p);
+        li.appendChild(hideBtn);
+
+        // run the hideInfo function when the hide button is clicked
+        hideBtn.onclick = function hideInfo() {
+          // remove the paragraph and hide button from the list item
+          li.removeChild(p);
+          li.removeChild(hideBtn);
+        }
       }
       list.appendChild(li);
     })
